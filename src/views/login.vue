@@ -11,12 +11,16 @@
         <el-button type="primary" size="small" @click="enterRoom">
           进入房间
         </el-button>
+        <el-button type="primary" size="small" @click="checkTurn">
+          检查turn
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 
 <script>
+  import { checkTURNServer } from '@/utils'
 export default {
   name: "login",
   data(){
@@ -35,6 +39,19 @@ export default {
       })
       this.$socket.on('full', (roomId, id) => {
         this.$notify.error(`${roomId}房间已满`)
+      })
+    },
+    checkTurn(){
+      let iceServers = [
+        {urls: 'stun:stun.l.google.com:19302'},
+        {
+          urls: 'turn:82.156.100.6:3478',
+          credential: 'liusinan',
+          username: 'liusinan'
+        }
+      ]
+      checkTURNServer(iceServers).then(res => {
+        console.log(res);
       })
     },
     enterRoom(){

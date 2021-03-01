@@ -140,7 +140,7 @@ export default {
               credential: 'liusinan',
               username: 'liusinan'
             }
-            ]
+          ]
         };
         this.pc = new RTCPeerConnection(pcConfig)
 
@@ -168,7 +168,7 @@ export default {
     call(){
       if (this.pc) {
         let options = {
-          // offerToReceiveAudio: 1,
+          offerToReceiveAudio: 1,
           offerToReceiveVideo: 1
         }
         this.pc.createOffer(options).then(this.getOffer)
