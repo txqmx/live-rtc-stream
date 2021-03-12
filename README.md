@@ -1,24 +1,18 @@
 # live-rtc-stream
 
-## Project setup
-```
-npm install
-```
+webrtc 学习
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+todo
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [x] 1v1 p2p视频
+- [x] mediasoup多人视频
+- [x] 分享桌面
+- [x] 流量监控
+- [x] 录制
+- [ ] 回放
+- [ ] 设备检查
+- [ ] 多房间管理
+- [ ] 合流
+- [ ] 添加音频
+- [ ] CDN旁路直播
+- [ ] 服务端部署

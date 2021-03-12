@@ -24,3 +24,24 @@ export function checkTURNServer(turnConfig, timeout){
     };
   });
 }
+
+export function getUrlParameter(name, targetUrl) {
+  let url = targetUrl || location.search || location.href
+  let paraString = url
+  .substring(url.indexOf('?') + 1, url.length)
+  .replace(/\?/g, '&')
+  .split('&')
+  let paraObj = {}
+  for (var i = 0, j; (j = paraString[i]); i++) {
+    paraObj[j.substring(0, j.indexOf('=')).toLowerCase()] = j.substring(
+      j.indexOf('=') + 1,
+      j.length
+    )
+  }
+  let returnValue = paraObj[name.toLowerCase()]
+  if (typeof returnValue === 'undefined') {
+    return ''
+  } else {
+    return decodeURIComponent(returnValue)
+  }
+}

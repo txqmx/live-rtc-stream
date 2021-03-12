@@ -4,10 +4,15 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'login',
+  //   component: () => import('../views/login.vue'),
+  // },
   {
     path: '/',
-    name: 'login',
-    component: () => import('../views/login.vue'),
+    name: 'mediaSoup',
+    component: () => import('../views/mediaSoup.vue'),
   },
   {
     path: '/liveRoom',
