@@ -19,6 +19,7 @@ module.exports = class FFmpeg {
 
   _createProcess () {
     const sdpString = createSdpText(this._rtpParameters);
+    console.log(sdpString);
     const sdpStream = convertStringToStream(sdpString);
 
     console.log('createProcess() [sdpString:%s]', sdpString);

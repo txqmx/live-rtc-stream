@@ -3,7 +3,6 @@ const { getCodecInfoFromRtpParameters } = require('./utils');
 // File to create SDP text from mediasoup RTP Parameters
 module.exports.createSdpText = (rtpParameters) => {
   const { video, audio } = rtpParameters;
-  console.log(video);
 
   // Video codec info
   const videoCodecInfo = getCodecInfoFromRtpParameters('video', video.rtpParameters);

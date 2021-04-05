@@ -63,7 +63,7 @@ export default class Room extends EventEmitter {
     const routerRtpCapabilities = await this.peer
       .request("getRouterRtpCapabilities")
       .catch(console.error);
-
+    console.log(routerRtpCapabilities);
     // 使用mediasoup路由器的RTP功能加载设备。这是设备了解允许的媒体编解码器和其他设置的方式
     await device.load({ routerRtpCapabilities });
 
@@ -214,7 +214,7 @@ export default class Room extends EventEmitter {
   streamSendMonitor(){
     if(this.sendTransport) {
       return this.sendTransport.getStats().then(res => {
-         return res.get('RTCTransport_0_1') ? res.get('RTCTransport_0_1').bytesSent : 0
+        return res.get('RTCTransport_0_1') ? res.get('RTCTransport_0_1').bytesSent : 0
       })
     } else {
       return Promise.resolve(0)

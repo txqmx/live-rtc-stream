@@ -7,7 +7,9 @@
       {{roomId}}
     </el-header>
     <el-container>
-      <el-main>Main</el-main>
+      <el-main id="app-main">
+        <white-board ref="whiteBoard"></white-board>
+      </el-main>
       <el-aside class="live-room-aside" width="260px">
         <div class="video-content">
           <div class="video-model">
@@ -28,11 +30,13 @@
 </template>
 
 <script>
+import whiteBoard from '../components/whiteBoard'
 function handleError(err) {
   console.error('Failed to get Media Stream!', err);
 }
 export default {
   name: 'liveRoom',
+  components: {whiteBoard},
   data() {
     return {
       roomId: this.$route.query.roomId,
@@ -55,14 +59,27 @@ export default {
     }
   },
   created() {
-    this.initListen()
+    // this.initListen()
   },
   mounted() {
     this.localVideo = document.querySelector('#localvideo');
     this.remoteVideo = document.querySelector('#remotevideo');
-    this.getUserMedia(this.mediaDevices)
+    // this.getUserMedia(this.mediaDevices)
+
+    this.initBoard()
   },
   methods: {
+    // 初始化白板
+    initBoard(){
+      let width = document.getElementById('app-main').clientWidth-40
+      let height = document.getElementById('app-main').clientHeight-40
+      let config = {
+        width: width,
+        height: height,
+        moveCallback: this.moveCallback
+      }
+      this.$refs.whiteBoard.init(config)
+    },
     // 初始化监听
     initListen(){
       this.$socket.on('leaved', (roomId) => {
@@ -203,14 +220,13 @@ export default {
 .live-room{
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
   .live-room-header{
     height: 60px;
     line-height: 60px;
-    color: #ffffff;
+    color: #333333;
     text-align: center;
     font-size: 18px;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #333333;
     .back{
       display: inline-block;
       width: 30px;
@@ -221,13 +237,14 @@ export default {
     }
   }
   .live-room-aside{
-    border-left: 1px solid #ffffff;
+    border-left: 1px solid #333333;
+    overflow: hidden;
     .video-content{
       position: relative;
       width: 260px;
       height: 195px;
       background: #999999;
-      border-bottom: 1px solid #ffffff;
+      border-bottom: 1px solid #333333;
       .video-model{
         position: absolute;
         width: 260px;

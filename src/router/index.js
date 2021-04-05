@@ -9,13 +9,13 @@ const routes = [
   //   name: 'login',
   //   component: () => import('../views/login.vue'),
   // },
+  // {
+  //   path: '/',
+  //   name: 'mediaSoup',
+  //   component: () => import('../views/mediaSoup.vue'),
+  // },
   {
     path: '/',
-    name: 'mediaSoup',
-    component: () => import('../views/mediaSoup.vue'),
-  },
-  {
-    path: '/liveRoom',
     name: 'liveRoom',
     component: () => import('../views/liveRoom.vue'),
   }

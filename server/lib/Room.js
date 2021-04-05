@@ -6,14 +6,21 @@ class ConfRoom {
   constructor(mediasoupRouter) {
     this._protooRoom = new Room();
     this._mediasoupRouter = mediasoupRouter;
+    // 流量监控
+    this.bytesSentRate = 0
+    this.bytesReceivedRate = 0
   }
 
-  getStatus() {
+  async getStatus() {
     const _transports = this._mediasoupRouter._transports;
-
     const transportDetails = [];
+    let bytesSentRate = 0
+    let bytesReceivedRate = 0
     for (const t of _transports.values()) {
       const item = {};
+      let Stats = await t.getStats()
+      bytesSentRate = bytesSentRate + Stats[0].rtpSendBitrate
+      bytesReceivedRate = bytesReceivedRate + Stats[0].rtpRecvBitrate
       if (t.appData.producing) {
         item.producer = t._producers.size;
       }
@@ -26,7 +33,9 @@ class ConfRoom {
     return {
       peer: this._protooRoom.peers.length,
       transport: _transports.size,
-      transports: transportDetails
+      // transports: transportDetails,
+      sentRate: parseInt(bytesSentRate/1000)+'kbs',
+      receivedRate: parseInt(bytesReceivedRate/1000)+'kbs'
     };
   }
 

@@ -45,6 +45,6 @@ const config = require('./config/config');
     });
   });
 
-  console.log("websocket server started on https://0.0.0.0:3000");
-  // setInterval(() => console.log("room stat", room.getStatus()), 1000 * 5);
+  console.log("websocket server started on https://10.25.41.86:3000");
+  setInterval(async () => console.log("room stat", await room.getStatus()), 1000 * 5);
 })();
