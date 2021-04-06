@@ -1,6 +1,3 @@
-/**
- * Created by wyw on 2019/3/28.
- */
 class Palette {
   constructor(canvas, {drawType, drawColor, lineWidth, sides, allowCallback, moveCallback}) {
     this.canvas = canvas;
