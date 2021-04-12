@@ -14,7 +14,7 @@ class Palette {
     this.drawType = drawType || 'line'; // 绘制形状
     this.drawColor = drawColor || '#000000'; // 绘制颜色
     this.lineWidth = lineWidth || 5; // 线条宽度
-    this.sides = sides; // 多边形边数
+    this.sides = sides || 3; // 多边形边数
     this.allowCallback = allowCallback || function () {}; // 允许操作的回调
     this.moveCallback = moveCallback || function () {}; // 鼠标移动的回调
     this.bindMousemove = function () {}; // 解决 eventlistener 不能bind
@@ -179,20 +179,22 @@ class Palette {
     this.allowCallback(this.index > 0, this.index < this.imgData.length - 1);
     this.paint.putImageData(this.imgData[this.index], 0, 0);
   }
-  clear() { // 清屏
+  // 清屏
+  clear() {
     this.imgData = [];
     this.paint.clearRect(0, 0, this.width, this.height);
     this.paint.fillStyle = '#fff';
     this.paint.fillRect(0, 0, this.width, this.height);
     this.gatherImage();
   }
-  // 绘制条件
+  // 绘制条件改变
   changeWay({type, color, lineWidth, sides}) {
     this.drawType = type !== 'color' && type || this.drawType; // 绘制形状
     this.drawColor = color || this.drawColor; // 绘制颜色
     this.lineWidth = lineWidth || this.lineWidth; // 线宽
     this.sides = sides || this.sides; // 边数
   }
+  // 销毁
   destroy() {
     this.clear();
     this.canvas.removeEventListener('mousedown', this.bindMousedown);

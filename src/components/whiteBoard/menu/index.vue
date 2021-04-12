@@ -3,9 +3,11 @@
     <div class="menu-item">
       <img src="./img/pick.png">
     </div>
+    <!--直线-->
     <div :class="['menu-item', {'active-color':  drawType === 'line'}]" @click="selectType('line')">
       <img src="./img/line.png">
     </div>
+    <!--颜色，粗细-->
     <div class="menu-item">
       <el-popover
         placement="top"
@@ -24,20 +26,37 @@
           </div>
         </div>
       </el-popover>
-
     </div>
-    <div class="menu-item">
-      <img src="./img/shape.svg">
+    <!--多边形-->
+    <div :class="['menu-item', {'active-color':  drawType === 'shape'}]" @click="selectType('shape', shapeType)">
+      <el-popover
+        placement="top"
+        trigger="click">
+        <div class="color-tab">
+          <div v-for="item in shapes" :key="item.type" :class="['color-item', {'active-color':  item.type === shapeType}]" @click="selectType('shape', item.type)">
+            <img style="width: 100%" :src="item.icon">
+          </div>
+        </div>
+        <div slot="reference">
+          <div style="height: 40px">
+            <img src="./img/shape.svg">
+          </div>
+        </div>
+      </el-popover>
     </div>
+    <!--文字-->
     <div class="menu-item">
       <img src="./img/text.png">
     </div>
+    <!--橡皮-->
     <div :class="['menu-item', {'active-color':  drawType === 'eraser'}]" @click="selectType('eraser')">
       <img src="./img/eraser.png">
     </div>
+    <!--清空-->
     <div class="menu-item" @click="selectType('clear')">
       <img src="./img/clear.png">
     </div>
+    <!--回退-->
     <div class="menu-item" @click="selectType('back')">
       <img src="./img/back.png">
     </div>
@@ -45,6 +64,9 @@
 </template>
 
 <script>
+import shape_round from './img/shape-round.png'
+import shape_square from './img/shape-square.png'
+import shape_triangle from './img/shape-triangle.png'
 export default {
   name: 'index',
   data(){
@@ -52,15 +74,29 @@ export default {
       colors: ['#000000', '#FF0002', '#3DDB7D', '#F38E36', '#9013FE'],
       lineColor: '#000000',
       lineWidth: 2,
-      drawType: 'line' // line  eraser
+      drawType: 'line', // line线条  eraser橡皮 shape多边形
+      shapeType: 'arc', // 多边形类型
+      shapes: [
+        {type: 'arc', icon: shape_round},
+        {type: 'rect', icon: shape_square},
+        {type: 'polygon', icon: shape_triangle},
+      ],// 圆、四边形、三角形
     }
   },
   methods:{
-    selectType(val){
-      switch (val) {
+    // 选择工具
+    selectType(type, val){
+      switch (type) {
         case 'line':
         case 'eraser':
-          this.drawType = val
+          this.drawType = type
+          this.$emit('changeLineStyle', {
+            type: type,
+          })
+          break
+        case 'shape':
+          this.drawType = type
+          this.shapeType = val
           this.$emit('changeLineStyle', {
             type: val,
           })
@@ -154,6 +190,9 @@ export default {
       width: 18px;
       height: 18px;
       border-radius: 18px;
+    }
+    img{
+      width: 100%;
     }
   }
 }
