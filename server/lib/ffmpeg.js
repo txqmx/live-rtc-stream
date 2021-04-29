@@ -71,12 +71,12 @@ module.exports = class FFmpeg {
 
   get _commandArgs () {
     let commandArgs = [
-      '-loglevel',
-      'debug',
+      // '-loglevel',
+      // 'debug',
       '-protocol_whitelist',
       'pipe,udp,rtp',
-      '-fflags',
-      '+genpts',
+      // '-fflags',
+      // '+genpts',
       '-f',
       'sdp',
       '-i',
@@ -86,23 +86,24 @@ module.exports = class FFmpeg {
     commandArgs = commandArgs.concat(this._videoArgs);
     // commandArgs = commandArgs.concat(this._audioArgs);
 
-    commandArgs = commandArgs.concat([
-      '-flags',
-      '+global_header',
-      `${RECORD_FILE_LOCATION_PATH}/${this._rtpParameters.fileName}.webm`
-    ]);
+    // commandArgs = commandArgs.concat([
+    //   '-flags',
+    //   '+global_header',
+    //   `${RECORD_FILE_LOCATION_PATH}/${this._rtpParameters.fileName}.webm`
+    // ]);
 
     console.log('commandArgs:%o', commandArgs);
 
     return commandArgs;
   }
-
+ // flv -acodec aac -ab 8000 -f flv rtmp://192.168.0.201:1935/live/stream3
   get _videoArgs () {
     return [
-      '-map',
-      '0:v:0',
-      '-c:v',
-      'copy'
+      '-vcodec',
+      'libx264',
+      '-f',
+      'flv',
+      'rtmp://10.211.55.3:1935/myapp/liu'
     ];
   }
 

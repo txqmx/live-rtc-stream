@@ -9,16 +9,16 @@ const routes = [
   //   name: 'login',
   //   component: () => import('../views/login.vue'),
   // },
-  // {
-  //   path: '/',
-  //   name: 'mediaSoup',
-  //   component: () => import('../views/mediaSoup.vue'),
-  // },
   {
     path: '/',
-    name: 'liveRoom',
-    component: () => import('../views/liveRoom.vue'),
-  }
+    name: 'mediaSoup',
+    component: () => import('../views/mediaSoup.vue'),
+  },
+  // {
+  //   path: '/',
+  //   name: 'liveRoom',
+  //   component: () => import('../views/liveRoom.vue'),
+  // }
 ]
 const router = new VueRouter({
   mode: 'hash',

@@ -14,7 +14,7 @@ export default class Room extends EventEmitter {
   // 加入房间
   join(userName) {
     console.warn("room.join()");
-    const wsTransport = new WebSocketTransport(`wss://localhost:3000`);
+    const wsTransport = new WebSocketTransport(`wss://10.25.40.97:3000`);
 
     this.peer = new Peer(wsTransport);
     // 信令连接成功，触发open
